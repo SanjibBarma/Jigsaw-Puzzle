@@ -1,8 +1,8 @@
-package com.example.jigsawpuzzle;
+package ltd.v2.game1;
 
 import android.util.Log;
 
-import com.example.jigsawpuzzle.model.Block;
+import ltd.v2.game1.model.Block;
 
 import java.util.ArrayList;
 import java.util.List;

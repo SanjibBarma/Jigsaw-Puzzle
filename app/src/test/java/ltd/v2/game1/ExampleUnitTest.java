@@ -1,4 +1,4 @@
-package com.example.jigsawpuzzle;
+package ltd.v2.game1;
 
 import org.junit.Test;
 

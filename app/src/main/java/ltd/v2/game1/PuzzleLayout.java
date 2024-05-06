@@ -1,4 +1,4 @@
-package com.example.jigsawpuzzle;
+package ltd.v2.game1;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 
 import androidx.customview.widget.ViewDragHelper;
 
-import com.example.jigsawpuzzle.model.Block;
+import ltd.v2.game1.model.Block;
 
 
 public class PuzzleLayout extends RelativeLayout {

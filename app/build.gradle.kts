@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.jigsawpuzzle"
+    namespace = "ltd.v2.game1"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.jigsawpuzzle"
+        applicationId = "ltd.v2.game1"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

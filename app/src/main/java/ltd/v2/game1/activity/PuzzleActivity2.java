@@ -1,4 +1,4 @@
-package ltd.v2.game1;
+package ltd.v2.game1.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import ltd.v2.game1.R;
+import ltd.v2.game1.helper.PuzzleLayout;
 
 public class PuzzleActivity2 extends AppCompatActivity implements Runnable{
     PuzzleLayout puzzleLayout;

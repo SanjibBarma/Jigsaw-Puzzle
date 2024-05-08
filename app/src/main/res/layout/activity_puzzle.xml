@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ltd.v2.game1.PuzzleLayout
+    <ltd.v2.game1.helper.PuzzleLayout
         android:id="@+id/activity_swipe_card"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </ltd.v2.game1.PuzzleLayout>
+    </ltd.v2.game1.helper.PuzzleLayout>
 
     <ImageView
         android:id="@+id/iv_tips"

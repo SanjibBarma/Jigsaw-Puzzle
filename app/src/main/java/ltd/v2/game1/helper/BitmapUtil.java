@@ -1,4 +1,4 @@
-package ltd.v2.game1;
+package ltd.v2.game1.helper;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;

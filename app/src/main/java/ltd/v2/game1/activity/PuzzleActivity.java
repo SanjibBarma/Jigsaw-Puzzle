@@ -1,4 +1,4 @@
-package ltd.v2.game1;
+package ltd.v2.game1.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +17,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import ltd.v2.game1.R;
+import ltd.v2.game1.helper.PuzzleLayout;
 
 public class PuzzleActivity extends AppCompatActivity implements Runnable{
     PuzzleLayout puzzleLayout;

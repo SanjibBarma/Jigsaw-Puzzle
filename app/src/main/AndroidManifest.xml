@@ -13,7 +13,8 @@
         android:theme="@style/Theme.JigsawPuzzle"
         tools:targetApi="31">
         <activity
-            android:name="ltd.v2.game1.PuzzleActivity2"
+            android:name="ltd.v2.game1.PuzzleActivity"
+            android:screenOrientation="landscape"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

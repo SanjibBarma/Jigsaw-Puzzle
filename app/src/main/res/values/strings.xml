@@ -3,7 +3,7 @@
     <string name="success">Congratulations on clearing the game!</string>
     <string name="next">Successfully unlocked a new level!</string>
     <string name="restart">Restart?</string>
-    <string name="thanks">Thanks.</string>
+    <string name="thanks">Thanks</string>
     <string name="ok">Sure</string>
     <string name="exit">Quit</string>
     <string name="complete">You are a genius, congratulations on passing the Game! !</string>

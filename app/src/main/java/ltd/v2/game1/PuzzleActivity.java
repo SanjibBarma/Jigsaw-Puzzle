@@ -1,13 +1,17 @@
 package ltd.v2.game1;
 
-import android.content.DialogInterface;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DateFormat;
@@ -18,52 +22,60 @@ import java.util.Locale;
 public class PuzzleActivity extends AppCompatActivity implements Runnable{
     PuzzleLayout puzzleLayout;
     ImageView ivTips;
-    int squareRootNum = 3;
+    int squareRootNum = 2;
     int drawableId = R.mipmap.mcqueen;
     String startTime = "";
     String endTime = "";
     boolean gameStatus = false;
+    AlertDialog successDialog;
+    View idBlockView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
         ivTips = (ImageView) findViewById(R.id.iv_tips);
-        ivTips.setImageResource(drawableId);
+        idBlockView = (View) findViewById(R.id.idBlockView);
         puzzleLayout = (PuzzleLayout) findViewById(R.id.activity_swipe_card);
-        puzzleLayout.setImage(drawableId, squareRootNum);
 
+        ivTips.setImageResource(drawableId);
+        puzzleLayout.setImage(drawableId, squareRootNum);
         startTime = getCurrentTime();
+
         puzzleLayout.setOnCompleteCallback(new PuzzleLayout.OnCompleteCallback() {
             @Override
             public void onComplete() {
                 gameStatus = true;
-                Toast.makeText(PuzzleActivity.this, R.string.success, Toast.LENGTH_LONG).show();
-                puzzleLayout.postDelayed(PuzzleActivity.this, 800);
+                idBlockView.setVisibility(View.VISIBLE);
+                puzzleLayout.postDelayed(PuzzleActivity.this, 10);
             }
         });
     }
 
     @Override
     public void run() {
-        showDialog();
+        showSuccessPopup();
         endTime = getCurrentTime();
     }
 
-    private void showDialog() {
-        new AlertDialog.Builder(PuzzleActivity.this)
-                .setTitle(R.string.success)
-                .setCancelable(false)
-                //.setMessage(R.string.restart)
-                .setPositiveButton(R.string.thanks,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                finishAffinity();
-                            }
-                        }).show();
+    private void showSuccessPopup() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        successDialog = builder.create();
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        final View customView = layoutInflater.inflate(R.layout.congratulate_popup, null);
+        LinearLayout saveData = (LinearLayout) customView.findViewById(R.id.saveData);
+        saveData.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                successDialog.dismiss();
+                finishAffinity();
+            }
+        });
+        successDialog.setCancelable(false);
+        successDialog.setView(customView);
+        successDialog.show();
+        successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
+
 
     private void sendDataToBroadcast() {
         Intent intent = new Intent();

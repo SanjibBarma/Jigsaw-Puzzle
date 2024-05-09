@@ -15,7 +15,7 @@ public class PuzzleActivity2 extends AppCompatActivity implements Runnable{
     PuzzleLayout puzzleLayout;
     ImageView ivTips;
     int squareRootNum = 2;
-    int drawableId = R.mipmap.mcqueen;
+    int drawableId = R.drawable.db_kv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +42,8 @@ public class PuzzleActivity2 extends AppCompatActivity implements Runnable{
             Toast.makeText(PuzzleActivity2.this, R.string.complete, Toast.LENGTH_SHORT).show();
             showDialog();
         }else {
-            ivTips.setImageResource(R.mipmap.mcqueen);
-            puzzleLayout.setImage(R.mipmap.mcqueen, squareRootNum);
+            ivTips.setImageResource(R.drawable.db_kv);
+            puzzleLayout.setImage(R.drawable.db_kv, squareRootNum);
         }
 
     }
@@ -57,7 +57,7 @@ public class PuzzleActivity2 extends AppCompatActivity implements Runnable{
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 squareRootNum = 2;
-                                drawableId = R.mipmap.mcqueen;
+                                drawableId = R.drawable.db_kv;
                                 ivTips.setImageResource(drawableId);
                                 puzzleLayout.setImage(drawableId, squareRootNum);
                             }

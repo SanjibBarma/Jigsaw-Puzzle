@@ -2,6 +2,8 @@ package ltd.v2.game1.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 import ltd.v2.game1.R;
 import ltd.v2.game1.helper.PuzzleLayout;
@@ -25,12 +29,13 @@ public class PuzzleActivity extends AppCompatActivity implements Runnable{
     PuzzleLayout puzzleLayout;
     ImageView ivTips;
     int squareRootNum = 2;
-    int drawableId = R.mipmap.mcqueen;
+    int drawableId = R.drawable.db_kv;
     String startTime = "";
     String endTime = "";
     boolean gameStatus = false;
     AlertDialog successDialog;
     View idBlockView;
+    TextView tvGameVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +44,28 @@ public class PuzzleActivity extends AppCompatActivity implements Runnable{
         ivTips = (ImageView) findViewById(R.id.iv_tips);
         idBlockView = (View) findViewById(R.id.idBlockView);
         puzzleLayout = (PuzzleLayout) findViewById(R.id.activity_swipe_card);
+        tvGameVersion = (TextView) findViewById(R.id.tvGameVersion);
+
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String version = pInfo.versionName;
+        tvGameVersion.setText("Version - "+ version);
+
+        String[] imageResourceNames = {"db_kv", "hw_kv"};
+        // Select a random image resource name
+        Random random = new Random();
+        String randomImageName = imageResourceNames[random.nextInt(imageResourceNames.length)];
+        // Get the resource ID of the selected image
+        int resourceId = getResources().getIdentifier(randomImageName, "drawable", getPackageName());
+
 
         ivTips.setImageResource(drawableId);
-        puzzleLayout.setImage(drawableId, squareRootNum);
+//        puzzleLayout.setImage(drawableId, squareRootNum);
+        puzzleLayout.setImage(resourceId, squareRootNum);
         startTime = getCurrentTime();
 
         puzzleLayout.setOnCompleteCallback(new PuzzleLayout.OnCompleteCallback() {

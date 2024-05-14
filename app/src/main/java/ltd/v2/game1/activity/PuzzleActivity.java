@@ -25,7 +25,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 import ltd.v2.game1.R;
 import ltd.v2.game1.helper.PuzzleLayout;
@@ -34,7 +33,7 @@ public class PuzzleActivity extends AppCompatActivity implements Runnable{
     PuzzleLayout puzzleLayout;
     ImageView ivTips;
     int squareRootNum = 2;
-    int drawableId /*= R.drawable.hw_kv*/;
+    int drawableId = R.drawable.hw_kv;
     String startTime = "";
     String endTime = "";
     boolean gameStatus = false;
@@ -42,7 +41,21 @@ public class PuzzleActivity extends AppCompatActivity implements Runnable{
     View idBlockView;
     TextView tvGameVersion;
     String primaryBrand = "Hollywood";
-
+    //boolean flag = false;
+    String brandName;
+//    BroadcastReceiver receiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            brandName = intent.getStringExtra("brandName");
+//
+//            if (brandName == null || brandName.equals("")){
+//                Toast.makeText(context, "Broadcast not Received!", Toast.LENGTH_SHORT).show();
+//            }else {
+//                flag = true;
+//            }
+//        }
+//    };
+//    ParcelReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +66,30 @@ public class PuzzleActivity extends AppCompatActivity implements Runnable{
         puzzleLayout = (PuzzleLayout) findViewById(R.id.activity_swipe_card);
         tvGameVersion = (TextView) findViewById(R.id.tvGameVersion);
 
-        String receivedParcel = getIntent().getStringExtra("brandName");
-        if (receivedParcel != null){
-            if (receivedParcel.equalsIgnoreCase("Hollywood")){
-                Log.d("receivedString: ", receivedParcel);
-                drawableId = R.drawable.hw_kv;
-            }else {
-                Log.d("receivedString: ", receivedParcel);
-                drawableId = R.drawable.db_kv;
-            }
-        }else {
-            drawableId = R.drawable.db_kv;
-            Log.d("receivedString: ", "Parcel not received");
-        }
+//        receiver = new ParcelReceiver();
+
+//        IntentFilter filter = new IntentFilter("ltd.v2.game1");
+////        registerReceiver(receiver, filter);
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            registerReceiver(receiver, filter, RECEIVER_EXPORTED);
+//        }else {
+//            registerReceiver(receiver, filter);
+//        }
+
+        //String receivedParcel = getIntent().getStringExtra("brandName");
+//        if (flag){
+//            if (brandName.equals("Hollywood")){
+//                Log.d("receivedString: ", brandName);
+//                drawableId = R.drawable.hw_kv;
+//            }else {
+//                Log.d("receivedString: ", brandName);
+//                drawableId = R.drawable.db_kv;
+//            }
+//        }else {
+//            drawableId = R.drawable.db_kv;
+//            Log.d("receivedString: ", "Parcel not received");
+//        }
         PackageInfo pInfo = null;
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -148,4 +172,23 @@ public class PuzzleActivity extends AppCompatActivity implements Runnable{
         Log.d("CurrentTime", sdt);
         return sdt;
     }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        IntentFilter filter = new IntentFilter("ltd.v2.game1");
+////        registerReceiver(receiver, filter);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            registerReceiver(receiver, filter, RECEIVER_EXPORTED);
+//        }else {
+//            registerReceiver(receiver, filter);
+//        }
+//    }
+//
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        unregisterReceiver(receiver);
+//    }
 }

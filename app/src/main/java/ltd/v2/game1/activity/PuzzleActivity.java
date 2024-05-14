@@ -1,11 +1,15 @@
 package ltd.v2.game1.activity;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,13 +34,15 @@ public class PuzzleActivity extends AppCompatActivity implements Runnable{
     PuzzleLayout puzzleLayout;
     ImageView ivTips;
     int squareRootNum = 2;
-    int drawableId = R.drawable.db_kv;
+    int drawableId /*= R.drawable.hw_kv*/;
     String startTime = "";
     String endTime = "";
     boolean gameStatus = false;
     AlertDialog successDialog;
     View idBlockView;
     TextView tvGameVersion;
+    String primaryBrand = "Hollywood";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,19 @@ public class PuzzleActivity extends AppCompatActivity implements Runnable{
         puzzleLayout = (PuzzleLayout) findViewById(R.id.activity_swipe_card);
         tvGameVersion = (TextView) findViewById(R.id.tvGameVersion);
 
+        String receivedParcel = getIntent().getStringExtra("brandName");
+        if (receivedParcel != null){
+            if (receivedParcel.equalsIgnoreCase("Hollywood")){
+                Log.d("receivedString: ", receivedParcel);
+                drawableId = R.drawable.hw_kv;
+            }else {
+                Log.d("receivedString: ", receivedParcel);
+                drawableId = R.drawable.db_kv;
+            }
+        }else {
+            drawableId = R.drawable.db_kv;
+            Log.d("receivedString: ", "Parcel not received");
+        }
         PackageInfo pInfo = null;
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -55,17 +75,16 @@ public class PuzzleActivity extends AppCompatActivity implements Runnable{
         String version = pInfo.versionName;
         tvGameVersion.setText("Version - "+ version);
 
-        String[] imageResourceNames = {"db_kv", "hw_kv"};
-        // Select a random image resource name
-        Random random = new Random();
-        String randomImageName = imageResourceNames[random.nextInt(imageResourceNames.length)];
-        // Get the resource ID of the selected image
-        int resourceId = getResources().getIdentifier(randomImageName, "drawable", getPackageName());
-
+//        String[] imageResourceNames = {"db_kv", "hw_kv"};
+//        // Select a random image resource name
+//        Random random = new Random();
+//        String randomImageName = imageResourceNames[random.nextInt(imageResourceNames.length)];
+//        // Get the resource ID of the selected image
+//        int resourceId = getResources().getIdentifier(randomImageName, "drawable", getPackageName());
 
         ivTips.setImageResource(drawableId);
-//        puzzleLayout.setImage(drawableId, squareRootNum);
-        puzzleLayout.setImage(resourceId, squareRootNum);
+        puzzleLayout.setImage(drawableId, squareRootNum);
+//        puzzleLayout.setImage(resourceId, squareRootNum);
         startTime = getCurrentTime();
 
         puzzleLayout.setOnCompleteCallback(new PuzzleLayout.OnCompleteCallback() {
